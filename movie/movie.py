@@ -19,6 +19,11 @@ class MovieServicer(movie_pb2_grpc.MovieServicer):
                                            id=movie['id'])
         return movie_pb2.MovieData(title="", rating="", director="", id="")
 
+    def GetListMovies(self, request, context):
+        for movie in self.db:
+            yield movie_pb2.MovieData(title=movie['title'], rating=movie['rating'], director=movie['director'],
+                                      id=movie['id'])
+
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
