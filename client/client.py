@@ -1,12 +1,12 @@
 import grpc
-
 import movie_pb2
 import movie_pb2_grpc
 
 
-def get_movie_by_id(stub,id):
+def get_movie_by_id(stub, id):
     movie = stub.GetMovieByID(id)
     print(movie)
+
 
 def run():
     # NOTE(gRPC Python Team): .close() is possible on a channel and should be
@@ -20,6 +20,7 @@ def run():
         get_movie_by_id(stub, movieid)
 
     channel.close()
+
 
 if __name__ == '__main__':
     run()
